@@ -55,8 +55,8 @@ const Dashboard = () => {
         <>
         {/* Aqui come;a a p[agina normal que a gente conhece  */}
 
-            <input type="text" value={message} onChange={(e) => { setMessage(e.target.value) }} />
-            <button onClick={() => { handleAdd() }}>Enviar</button>
+            {/* <input type="text" value={message} onChange={(e) => { setMessage(e.target.value) }} />
+            <button onClick={() => { handleAdd() }}>Enviar</button> */}
 
             {/* {messages.map((m: any) => (
                 <>

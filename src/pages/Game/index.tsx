@@ -1,36 +1,69 @@
-import './style.css'
-import Card from '../../components/Card'
-import Xp from '../../components/Xp'
-import { useState } from 'react'
+import React, { useState } from 'react';
+import './style.css';
 
 const Game = () => {
+  const [cards, setCards] = useState([
+    { id: 1, value: 'A', flipped: false, matched: false },
+    { id: 2, value: 'A', flipped: false, matched: false },
+    { id: 3, value: 'B', flipped: false, matched: false },
+    { id: 4, value: 'B', flipped: false, matched: false },
+  ]);
 
-    const [cards, setCards] = useState([
-        {
-            front: "Gato",
-            back: "Cat"
-        },
-        {
-            front: "Vaca",
-            back: "Cow"
-        },
-        {
-            front: "Cachorro",
-            back: "Dog"
-        }
-    ])
+  const [flippedCards, setFlippedCards] = useState([]);
 
-    return (
-        <>
-            <div id="container-topo">
-                <div className='titulo'>FlashCard Challenge</div>
-                <Xp total={10} />
+  const handleClick = (id) => {
+    const newCards = cards.map((card) =>
+      card.id === id ? { ...card, flipped: true } : card
+    );
+
+    setCards(newCards);
+    setFlippedCards([...flippedCards, id]);
+
+    if (flippedCards.length === 1) {
+      const matched = cards.find((card) => card.id === flippedCards[0]).value;
+
+      if (matched === newCards.find((card) => card.id === id).value) {
+        setCards(
+          newCards.map((card) =>
+            card.value === matched ? { ...card, matched: true } : card
+          )
+        );
+        setFlippedCards([]);
+      } else {
+        setTimeout(() => {
+          setCards(
+            newCards.map((card) =>
+              card.id === id || card.id === flippedCards[0]
+                ? { ...card, flipped: false }
+                : card
+            )
+          );
+          setFlippedCards([]);
+        }, 1000);
+      }
+    }
+  };
+
+  return (
+    <div className="game">
+      <div className="grid">
+        {cards.map((card) => (
+          <div
+            key={card.id}
+            className={`card ${card.flipped ? 'flipped' : ''} ${
+              card.matched ? 'matched' : ''
+            }`}
+            onClick={() => !card.flipped && handleClick(card.id)}
+          >
+            <div className="card-inner">
+              <div className="card-front">XXX</div>
+              <div className="card-back">{card.value}</div>
             </div>
-            <div id="container-cards">
-                {cards.map((card => <Card content={card} />))}
-            </div>
-        </>
-    )
-}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default Game
+export default Game;
