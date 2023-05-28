@@ -2,15 +2,26 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 
 const Game = () => {
-  const [cards, setCards] = useState([
-    { id: 1, value: 'A', flipped: false, matched: false },
-    { id: 2, value: 'A', flipped: false, matched: false },
-    { id: 3, value: 'B', flipped: false, matched: false },
-    { id: 4, value: 'B', flipped: false, matched: false },
-  ]);
+  const initialCards = [
+    { id: 1, value: 'ANGULAR', flipped: false, matched: false },
+    { id: 2, value: 'ANGULAR', flipped: false, matched: false },
+    { id: 3, value: 'REACT', flipped: false, matched: false },
+    { id: 4, value: 'REACT', flipped: false, matched: false },
+    { id: 5, value: 'VUE', flipped: false, matched: false },
+    { id: 6, value: 'VUE', flipped: false, matched: false },
+    { id: 7, value: 'JAVASCRIPT', flipped: false, matched: false },
+    { id: 8, value: 'JAVASCRIPT', flipped: false, matched: false },
+    { id: 9, value: 'PYTHON', flipped: false, matched: false },
+    { id: 10, value: 'PYTHON', flipped: false, matched: false },
+  ];
 
+  const [cards, setCards] = useState(shuffle(initialCards));
   const [flippedCards, setFlippedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   useEffect(() => {
     checkGameOver();
@@ -39,6 +50,7 @@ const Game = () => {
           )
         );
         setFlippedCards([]);
+        setScore(score + 5);
       } else {
         setTimeout(() => {
           setCards(
@@ -49,16 +61,27 @@ const Game = () => {
             )
           );
           setFlippedCards([]);
+          setScore(score > 0 ? score - 2 : 0);
         }, 1000);
       }
     }
   };
 
   const handleRestart = () => {
-    setCards(cards.map((card) => ({ ...card, flipped: false, matched: false })));
+    setCards(shuffle(initialCards.map((card) => ({ ...card, flipped: false, matched: false }))));
     setFlippedCards([]);
     setGameOver(false);
+    setScore(0);
   };
+
+  function shuffle(array) {
+    const shuffledArray = array.slice();
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  }
 
   return (
     <div className="game">
@@ -78,15 +101,28 @@ const Game = () => {
           </div>
         ))}
       </div>
-      <div>
-        
-      </div>
-      {gameOver && (
+      {gameOver ? (
         <div className="message">
-          <button onClick={handleRestart}>Jogar novamente</button>
+        <div className="score">Pontos: {score}</div>
+          {/* <button onClick={handleRestart}>Jogar novamente</button> */}
+          
         </div>
+        
+      ) : (
+        <div className="message">
+            <div className="score">Pontos: {score}             </div>
+            <button onClick={handleRefresh}>Voltar</button>
+        </div>
+        
       )}
+
+    {/* <div>
+      <button onClick={handleRefresh}>Voltar</button>
+    </div> */}
+      
     </div>
+
+    
   );
 };
 
