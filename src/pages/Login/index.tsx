@@ -30,15 +30,15 @@ const Login = () => {
       <form onSubmit={handleLogin}> {/* Chama a função handleLogin quando o formulário é submetido */}
         <label>
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> {/* Atualiza o estado do email conforme o usuário digita */}
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> {/* Atualiza o login conforme o usuário digita */}
         </label>
         <label>
           Senha:
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> {/* Atualiza o estado da senha conforme o usuário digita */}
         </label>
-        <button type="submit">Entrar</button> {/* Submete o formulário quando o botão é clicado */}
+        <button type="submit">Entrar</button> 
       </form>
-      <Link to="/dashboard">Ir para o Dashboard</Link> {/* Link para a página de dashboard */}
+      {/* <Link to="/dashboard">Ir para o Dashboard</Link> Link para a página de dashboard */}
     </div>
     </>
   );
