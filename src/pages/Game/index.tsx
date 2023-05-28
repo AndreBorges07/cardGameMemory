@@ -104,7 +104,7 @@ const Game = () => {
       {gameOver ? (
         <div className="message">
         <div className="score">Pontos: {score}</div>
-          {/* <button onClick={handleRestart}>Jogar novamente</button> */}
+          <button onClick={handleRestart}>Jogar novamente</button>
           
         </div>
         
