@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 const Game = () => {
@@ -7,12 +7,19 @@ const Game = () => {
     { id: 2, value: 'A', flipped: false, matched: false },
     { id: 3, value: 'B', flipped: false, matched: false },
     { id: 4, value: 'B', flipped: false, matched: false },
-    { id: 5, value: 'C', flipped: false, matched: false },
-    { id: 6, value: 'C', flipped: false, matched: false },
   ]);
 
   const [flippedCards, setFlippedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => {
+    checkGameOver();
+  }, [cards]);
+
+  const checkGameOver = () => {
+    const allMatched = cards.every((card) => card.matched);
+    setGameOver(allMatched);
+  };
 
   const handleClick = (id) => {
     const newCards = cards.map((card) =>
@@ -47,29 +54,36 @@ const Game = () => {
     }
   };
 
+  const handleRestart = () => {
+    setCards(cards.map((card) => ({ ...card, flipped: false, matched: false })));
+    setFlippedCards([]);
+    setGameOver(false);
+  };
+
   return (
     <div className="game">
-      {gameOver ? (
-        <div className="message">
-          <h2>Você venceu!</h2>
-          <button onClick={resetGame}>Jogar novamente</button>
-        </div>
-      ) : (
-        <div className="grid">
-          {cards.map((card) => (
-            <div
-              key={card.id}
-              className={`card ${card.flipped ? 'flipped' : ''} ${
-                card.matched ? 'matched' : ''
-              }`}
-              onClick={() => !card.flipped && handleClick(card.id)}
-            >
-              <div className="card-inner">
-                <div className="card-front">?</div>
-                <div className="card-back">{card.value}</div>
-              </div>
+      <div className="grid">
+        {cards.map((card) => (
+          <div
+            key={card.id}
+            className={`card ${card.flipped ? 'flipped' : ''} ${
+              card.matched ? 'matched' : ''
+            }`}
+            onClick={() => !card.flipped && !gameOver && handleClick(card.id)}
+          >
+            <div className="card-inner">
+              <div className="card-front">?</div>
+              <div className="card-back">{card.value}</div>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+      <div>
+        
+      </div>
+      {gameOver && (
+        <div className="message">
+          <button onClick={handleRestart}>Jogar novamente</button>
         </div>
       )}
     </div>
