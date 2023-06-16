@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
+import React, { useState, useEffect } from "react";
+import "./style.css";
 
 const Game = () => {
   const initialCards = [
-    { id: 1, value: 'ANGULAR', flipped: false, matched: false },
-    { id: 2, value: 'ANGULAR', flipped: false, matched: false },
-    { id: 3, value: 'REACT', flipped: false, matched: false },
-    { id: 4, value: 'REACT', flipped: false, matched: false },
-    { id: 5, value: 'VUE', flipped: false, matched: false },
-    { id: 6, value: 'VUE', flipped: false, matched: false },
-    { id: 7, value: 'JAVASCRIPT', flipped: false, matched: false },
-    { id: 8, value: 'JAVASCRIPT', flipped: false, matched: false },
-    { id: 9, value: 'PYTHON', flipped: false, matched: false },
-    { id: 10, value: 'PYTHON', flipped: false, matched: false },
+    { id: 1, value: "ANGULAR", flipped: false, matched: false },
+    { id: 2, value: "ANGULAR", flipped: false, matched: false },
+    { id: 3, value: "REACT", flipped: false, matched: false },
+    { id: 4, value: "REACT", flipped: false, matched: false },
+    { id: 5, value: "VUE", flipped: false, matched: false },
+    { id: 6, value: "VUE", flipped: false, matched: false },
+    { id: 7, value: "JAVASCRIPT", flipped: false, matched: false },
+    { id: 8, value: "JAVASCRIPT", flipped: false, matched: false },
+    { id: 9, value: "PYTHON", flipped: false, matched: false },
+    { id: 10, value: "PYTHON", flipped: false, matched: false },
   ];
 
   const [cards, setCards] = useState(shuffle(initialCards));
@@ -50,7 +50,7 @@ const Game = () => {
           )
         );
         setFlippedCards([]);
-        setScore(score + 5);
+        setScore(score + 5); //Pontuação quando ganha
       } else {
         setTimeout(() => {
           setCards(
@@ -61,14 +61,22 @@ const Game = () => {
             )
           );
           setFlippedCards([]);
-          setScore(score > 0 ? score - 2 : 0);
+          setScore(score > 0 ? score - 2 : 0); //Se perder, perde os pontos aqui.
         }, 1000);
       }
     }
   };
 
   const handleRestart = () => {
-    setCards(shuffle(initialCards.map((card) => ({ ...card, flipped: false, matched: false }))));
+    setCards(
+      shuffle(
+        initialCards.map((card) => ({
+          ...card,
+          flipped: false,
+          matched: false,
+        }))
+      )
+    );
     setFlippedCards([]);
     setGameOver(false);
     setScore(0);
@@ -78,7 +86,10 @@ const Game = () => {
     const shuffledArray = array.slice();
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
     }
     return shuffledArray;
   }
@@ -89,8 +100,8 @@ const Game = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`card ${card.flipped ? 'flipped' : ''} ${
-              card.matched ? 'matched' : ''
+            className={`card ${card.flipped ? "flipped" : ""} ${
+              card.matched ? "matched" : ""
             }`}
             onClick={() => !card.flipped && !gameOver && handleClick(card.id)}
           >
@@ -103,26 +114,16 @@ const Game = () => {
       </div>
       {gameOver ? (
         <div className="message">
-        <div className="score">Pontos: {score}</div>
+          <div className="score">Pontos: {score}</div>
           <button onClick={handleRestart}>Jogar novamente</button>
-          
         </div>
-        
       ) : (
         <div className="message">
-            <div className="score">Pontos: {score}             </div>
-            <button onClick={handleRefresh}>Voltar</button>
+          <div className="score">Pontos: {score} </div>
+          <button onClick={handleRefresh}>Voltar</button>
         </div>
-        
       )}
-
-    {/* <div>
-      <button onClick={handleRefresh}>Voltar</button>
-    </div> */}
-      
     </div>
-
-    
   );
 };
 

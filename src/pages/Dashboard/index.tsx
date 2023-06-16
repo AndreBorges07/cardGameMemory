@@ -74,12 +74,6 @@ const Dashboard = () => {
         </>
       ))}
 
-      {/*
-            Tentei puxar do fire, mas não vai. 
-            <p>{cartoes[0].data.value}</p>
-            <p>{cartoes[1].data.value}</p>
-            <p>{cartoes[3].data.value}</p> */}
-
       <h1>Dashboard</h1>
       <Link to="/game" className="message">
         JOGAR!
