@@ -2,7 +2,7 @@
   "name": "flashcards",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://AndreBorges07.github.io/cardGameMemory",
+  "homepage": "https://andreborges07.github.io/cardGameMemory/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
