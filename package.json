@@ -2,16 +2,15 @@
   "name": "flashcards",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://andreborges07.github.io/cardGameMemory/",
+  "homepage": "https://andreborges07.github.io/cardGameMemory",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "start": "react-scripts start" 
-    
+    "preview": "vite preview"
   },
   "dependencies": {
     "firebase": "^9.20.0",
