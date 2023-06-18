@@ -96,8 +96,25 @@ const Game = () => {
   }
 
   return (
-    <div className="game">
+
+      <div className="game">
+
+    {gameOver ? (
+        <div className="button-novo">
+          <div className="score">Pontos: {score}</div>
+          <button className="btn outline" onClick={handleRestart}>Jogar novamente</button>
+        </div>
+      ) : (
+        <div className="button-novo">
+          <div className="score">Pontos: {score} </div>
+          <button className="btn outline" onClick={handleRefresh}>Voltar</button>
+         
+
+        </div>
+      )}
+      
       <div className="grid">
+        
         {cards.map((card) => (
           <div
             key={card.id}
@@ -113,19 +130,7 @@ const Game = () => {
           </div>
         ))}
       </div>
-      {gameOver ? (
-        <div className="message">
-          <div className="score">Pontos: {score}</div>
-          <button onClick={handleRestart}>Jogar novamente</button>
-        </div>
-      ) : (
-        <div className="message">
-          <div className="score">Pontos: {score} </div>
-          <button onClick={handleRefresh}>Voltar</button>
-         
-
-        </div>
-      )}
+      
     </div>
   );
 };
