@@ -59,13 +59,22 @@ const Dashboard = () => {
         </div>
       ))}
 
-      <h1>Dashboard</h1>
-      <Link to="/game" className="message">
-        JOGAR!
+<div class="container">
+ <div class="wrapper">
+   <div class="banner-image"> </div>
+   <h1> Dashbord</h1>
+   <p>Jogo da memória! Teste sua memória decorando os nomes dos frameworks</p>
+  </div>
+  <div class="button-wrapper"> 
+  
+    
+    <Link to="/game" className="btn fill">
+        Jogar
       </Link>
-      <div className="deslogar" onClick={() => signOut()}>
-        Deslogar
-      </div>
+    <button class="btn outline" onClick={() => signOut()}>Deslogar</button>
+  </div>
+    </div>
+
     </>
   );
 };
