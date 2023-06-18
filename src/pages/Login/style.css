@@ -36,6 +36,12 @@
 .btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { 
   background-color: #e6e6e6; 
 }
+
+input::placeholder{
+   color: #b6b5b5;
+}
+
+
 .btn-large {
    padding: 9px 14px;
     font-size: 15px;

@@ -28,10 +28,8 @@ const Login = () => {
   <div className="login">
   <h1>Login</h1>
     <form onSubmit={handleLogin}>
-      <label>
-    	<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-       </label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      	<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Usuário' />
+         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Senha' />
         <button type="submit" class="btn btn-primary btn-block btn-large">Entrar</button>
     </form>
       {/* <Link to="/dashboard">Ir para o Dashboard</Link> Link para a página de dashboard */}
