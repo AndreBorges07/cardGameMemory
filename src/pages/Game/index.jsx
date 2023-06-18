@@ -120,7 +120,9 @@ const Game = () => {
       ) : (
         <div className="message">
           <div className="score">Pontos: {score} </div>
-          <button onClick={handleRefresh}>Voltar</button>
+          {/* <button onClick={handleRefresh}>Voltar</button> */}
+          <button to="/Dashbord">Voltar</button>
+
         </div>
       )}
     </div>
