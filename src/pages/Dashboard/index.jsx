@@ -18,8 +18,8 @@ const Dashboard = () => {
   const { signOut } = useContext(UserContext);
 
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<any>([]);
-  const [cartoes, setCartoes] = useState<any>([]);
+  const [messages, setMessages] = useState([]);
+  const [cartoes, setCartoes] = useState([]);
 
   useEffect(() => {
     const q = query(collection(db, "Cartoes"));
@@ -29,17 +29,6 @@ const Dashboard = () => {
           data: doc.data(),
         }))
       );
-
-      // const aux: any = []
-      // querySnapshot.forEach((doc: any) => {
-      //     console.log(doc.id, doc.data())
-      //     aux.push({
-      //         id: doc.id,
-      //         ...doc.data()
-      //     })
-
-      // })
-      // setMessages([...aux])
     });
   }, []);
 
@@ -54,24 +43,20 @@ const Dashboard = () => {
     };
 
     const docref = await addDoc(collection(db, "Cartoes"), cartoes_json);
-    // console.log('docref', docref.id)
-
-    // setMessages([...messages, message_json])
     setMessage("");
   };
 
   return (
     <>
-      {/* Aqui começa a página normal que a gente conhece  */}
-
+      {/* Aqui começa a página normal que a gente conhece */}
       {/* <input type="text" value={message} onChange={(e) => { setMessage(e.target.value) }} />
             <button onClick={() => { handleAdd() }}>Enviar</button> */}
-
-      {cartoes.map((c: any) => (
-        <>
+      
+      {cartoes.map((c) => (
+        <div key={c.id}>
           <div>{c.value}</div>
           <div>{c.flipped}</div>
-        </>
+        </div>
       ))}
 
       <h1>Dashboard</h1>
