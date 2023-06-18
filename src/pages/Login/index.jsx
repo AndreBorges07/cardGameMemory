@@ -25,19 +25,15 @@ const Login = () => {
   return (
     <>
 
-<div className="login-card">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}> {/* Chama a função handleLogin quando o formulário é submetido */}
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> {/* Atualiza o login conforme o usuário digita */}
-        </label>
-        <label>
-          Senha:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> {/* Atualiza o estado da senha conforme o usuário digita */}
-        </label>
-        <button type="submit">Entrar</button> 
-      </form>
+  <div className="login">
+  <h1>Login</h1>
+    <form onSubmit={handleLogin}>
+      <label>
+    	<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+       </label>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Entrar</button>
+    </form>
       {/* <Link to="/dashboard">Ir para o Dashboard</Link> Link para a página de dashboard */}
     </div>
     </>

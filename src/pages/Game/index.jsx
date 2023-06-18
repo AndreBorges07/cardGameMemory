@@ -20,6 +20,7 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const handleRefresh = () => {
+
     window.location.reload();
   };
 
@@ -120,8 +121,8 @@ const Game = () => {
       ) : (
         <div className="message">
           <div className="score">Pontos: {score} </div>
-          {/* <button onClick={handleRefresh}>Voltar</button> */}
-          <button to="/Dashbord">Voltar</button>
+          <button onClick={handleRefresh}>Voltar</button>
+         
 
         </div>
       )}
